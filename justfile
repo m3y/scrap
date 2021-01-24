@@ -10,7 +10,7 @@ prepare:
 	@cargo audit --help 2>&1 > /dev/null || cargo install cargo-audit
 
 # run
-run +OPTION: prepare
+run +OPTION='': prepare
 	@RUSTC_WRAPPER={{`which sccache`}} cargo run -- {{OPTION}}
 
 # build
