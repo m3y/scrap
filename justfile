@@ -13,6 +13,15 @@ prepare:
 run +OPTION='': prepare
 	@RUSTC_WRAPPER={{`which sccache`}} cargo run -- {{OPTION}}
 
+# check
+check: lint
+	@cargo outdated
+	@cargo audit
+
+# update
+update: check
+	@cargo update
+
 # build
 build: prepare
 	@RUSTC_WRAPPER={{`which sccache`}} cargo build
@@ -20,14 +29,11 @@ build: prepare
 # fmt
 fmt: prepare
 	@cargo fmt
+	@cargo tomlfmt
 
 # lint
 lint: prepare
 	@cargo clippy
-
-# audit
-audit: lint
-	@cargo audit
 
 # test
 test: prepare
