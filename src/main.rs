@@ -34,7 +34,7 @@ fn main() -> Result<()> {
 
     let body = reqwest::blocking::get(&url)?.text()?;
 
-    match Document::from(body.as_str()).find(Name("title")).nth(0) {
+    match Document::from(body.as_str()).find(Name("title")).next() {
         Some(t) => {
             println!("- {}\n  - [ ] {}\n", t.text(), url);
         }
